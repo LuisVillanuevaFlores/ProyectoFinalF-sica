@@ -4,44 +4,7 @@ import numpy as np
 from numpy import array as npa
 import matplotlib.animation as animation
 import matplotlib.patches as mp
-def euler(espacio,velocidad):
-    espacio=npa(espacio,dtype=np.float32)
-    velocidad = npa(velocidad,dtype=np.float32)
-    pt = np.arange(0,time,h)
-    pe=[]
-    for t in pt:
-        aceleracion=(-espacio/(sum(espacio**2))**(1.5))
-        velocidad+=(aceleracion*h)
-        espacio+=(velocidad*h)
-        if(abs(espacio[0])>xlim):break
-        if(abs(espacio[1])>ylim):break
-        if((sum(espacio**2))**0.5<=r):break
-        pe.append(espacio.tolist())
-    return npa(pe)
-def tres_cps(espacio,velocidad):
-    espacio=npa(espacio,dtype=np.float32)
-    velocidad = npa(velocidad,dtype=np.float32)
-    aceleracion = npa([0,0],dtype=np.float32)
-    pt = np.arange(0,time,h)
-    pe=[]
-    pv=[]
-    pa=[]
-    for t in pt:
-        x1=espacio[0]+d
-        x2=espacio[0]-d
-        y=espacio[1]
-        aceleracion[0]=-x1/(x1**2+y**2)**(1.5)-x2/(x2**2+y**2)**(1.5)
-        aceleracion[1]=-y/(x1**2+y**2)**(1.5)-y/(x2**2+y**2)**(1.5)
-        velocidad+=(aceleracion*h)
-        espacio+=(velocidad*h)
-        if(abs(espacio[0])>xlim):break
-        if(abs(espacio[1])>ylim):break
-        if((x1**2+y**2)**0.5<=r):break
-        if((x2**2+y**2)**0.5<=r):break
-        pe.append(espacio.tolist())
-        pv.append(velocidad.tolist())
-        pa.append(aceleracion.tolist())
-    return npa(pe)
+
 def cuatro_cps(espacio,velocidad):
     espacio=npa(espacio,dtype=np.float32)
     velocidad = npa(velocidad,dtype=np.float32)
@@ -73,95 +36,8 @@ xlim=60
 ylim=60
 h=0.01
 r=5
-"""
-time=1200
-exercise="1.1"
-espacio=[0,7]
-plt.figure()
-circle = plt.Circle((0, 0), r,lw=1,alpha=0.4)
-plt.gca().add_artist(circle)
-plt.gcf().suptitle(exercise+": x - y", fontsize=16)
-plt.xlabel('espacio x')
-plt.ylabel('espacio y')
-plt.grid(True)
-plt.gca().axis('equal')
-for v in np.arange(0,1,0.05):
-    pe=euler(espacio,[v,0])
-    plt.plot(pe[:,0],pe[:,1],label="v={:.2}".format(v))
-plt.legend()
-plt.savefig(exercise+" xy.png")
-plt.show()    
-"""
-"""
-r=2
-time=1200
-exercise="1.2"
-espacio=[3,4]
-plt.figure()
-circle = plt.Circle((0, 0), r,lw=1,alpha=0.4)
-plt.gca().add_artist(circle)
-plt.gcf().suptitle(exercise+": x - y", fontsize=16)
-plt.xlabel('espacio x')
-plt.ylabel('espacio y')
-plt.grid(True)
-plt.gca().axis('equal')
-for v in np.arange(0,1,0.05):
-    pe=euler(espacio,[v,0])
-    plt.plot(pe[:,0],pe[:,1],label="v={:.2}".format(v))
-plt.legend()
-plt.savefig(exercise+" xy.png")
-plt.show()
-"""
-"""
-r=2
-time=1200
-exercise="1.2"
-espacio=[3,4]
-plt.figure()
-circle = plt.Circle((0, 0), r,lw=1,alpha=0.4)
-plt.gca().add_artist(circle)
-plt.gcf().suptitle(exercise+": x - y", fontsize=16)
-plt.xlabel('espacio x')
-plt.ylabel('espacio y')
-plt.grid(True)
-plt.gca().axis('equal')
-for v in np.arange(0,1,0.05):
-    pe=euler(espacio,[v,0])
-    plt.plot(pe[:,0],pe[:,1],label="v={:.2}".format(v))
-plt.legend()
-plt.savefig(exercise+" xy.png")
-plt.show()    
-"""
-"""
-h=0.01
-r=2
-d=10
-time=1000
-exercise="2"
-espacio=[10,10]
-plt.figure()
-pla1 = plt.Circle((-d, 0), r,lw=1,alpha=0.4)
-pla2 = plt.Circle((d, 0), r,lw=1,alpha=0.4)
-plt.gca().add_artist(pla1)
-plt.gca().add_artist(pla2)
-plt.gcf().suptitle(exercise+": x - y", fontsize=16)
-plt.xlabel('espacio x')
-plt.ylabel('espacio y')
-plt.grid(True)
-plt.gca().axis('equal')
-for v in np.arange(0,1,0.1):
-    pe=tres_cps(espacio,[v,0])
-    plt.plot(pe[:,0],pe[:,1],label="v={:.2}".format(v))
-##v=0.3
-##pe=tres_cps(espacio,[v,0])
-##plt.plot(pe[:,0],pe[:,1],label="v={:.2}".format(v))
-plt.ylim((-ylim,ylim))
-plt.xlim((-xlim,xlim))
-plt.legend()
-plt.savefig(exercise+" xy.png")
-plt.show()
-"""
-"""
+
+
 r=2
 d=20
 b=20
@@ -191,7 +67,7 @@ plt.xlim((-xlim,xlim))
 plt.legend()
 plt.savefig(exercise+" xy.png")
 plt.show()
-"""
+
 
 class Point():
     # Constructor de nuestra clase,el cual inicializara los valores por defecto de cada particula.
